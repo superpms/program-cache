@@ -1,0 +1,23 @@
+{
+    "name": "superpms/program-fcache",
+    "license": "Apache-2.0",
+    "description": "pms cache program",
+    "autoload": {
+        "files": [
+            "bin/autoload.php"
+        ],
+        "psr-4": {
+            "pms\\": "src/pms/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Guest",
+            "email": "kid666@88.com"
+        }
+    ],
+    "require": {
+        "php": ">=8.1",
+        "superpms/framework": "^2.0.0"
+    }
+}
