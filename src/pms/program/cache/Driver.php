@@ -170,7 +170,7 @@ class Driver
      * @param int $expireTime 缓存过期时间
      * @return mixed
      */
-    public function setnxDCS(string $name, \Closure $callback, int $expireTime = 0){
+    public function setnxCache(string $name, \Closure $callback, int $expireTime = 0,int $retryCount = 10){
         $data = $this->get($name);
         if (empty($data)) {
             $lockName = 'lock:' . $name;
@@ -188,8 +188,8 @@ class Driver
                 $count = 0; // 等待的次数
                 usleep(100000);
                 while (empty($this->get($name))) {
-                    // 如果循环了5次还没有等到结果（100毫秒 * 10），则判定去取数据的进程死亡（代码报错）
-                    if ($count > 10) {
+                    // 如果循环了10次还没有等到结果（100毫秒 * $retryCount (默认10)），则判定去取数据的进程死亡（代码报错）
+                    if ($count > $retryCount) {
                         throw new \RedisException("请求终止");
                         // 杀死所有进程（避免浪费服务器资源）
                     }
