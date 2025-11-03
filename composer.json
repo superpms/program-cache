@@ -19,7 +19,9 @@
         }
     ],
     "require": {
-        "php": ">=8.1",
+        "php": ">=8.1"
+    },
+    "require-dev": {
         "superpms/basic": "^1.0.0"
     }
 }
